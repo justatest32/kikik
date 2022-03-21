@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}View Tracker Logs{% endblock %}
+{% block content %}
+<div class="container shadow-sm emp-profile profile-head">
+  <form method="post">
+    <div>
+      <h3>{{ tracker.name }} tracker</h3>
+      <h4><small style="font-size: 12px">last updated : {{hour}} hours {{min}} minutes {{sec}} seconds ago</small></h4>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#graph">Graph</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#logs">Logs</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="graph" class="tab-pane fade show active">
+        <img src="{{url_for('static',filename='Images/graph.png')}}" alt="" style="width: 900px;height: 350px">
+      </div>
+      <div id="logs" class="tab-pane fade">
+        <table class="table table-hover align-middle">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">On</th>
+              <th scope="col">Value</th>
+              <th scope="col">Notes</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for log in logs %}
+            {% if log.user_id==user.id and log.tracker_id==tracker.id %}
+            <tr>
+              {% set log_id=log.id %}
+              <td>{{log.timestamp}}</td>
+              <td>{{log.value}}</td>
+              <td>{{log.notes}}</td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ url_for('views.edit_log', record_id = log_id) }}">Edit Log</a>
+                    <a class="dropdown-item" href="{{ url_for('views.delete_log', record_id = log_id) }}">Remove Log</a>
+                  </div>
+                </div>       
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

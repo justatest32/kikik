@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Add Log{% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-group emp-profile container shadow-sm col-md-4" style="text-align:center;">
+        <h5 style="padding-bottom: 5%;">Add log to {{tracker.name}}</h5>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <span class="input-group-text">When:</span>
+                <input type="datetime-local" class="form-control" id="date" name="date" style="text-align: center" value="{{now}}" required />
+            </div>
+        </div>    
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div>
+                {% if tracker.tracker_type=='Numerical' %}
+                <input type="number" class="form-control" id="value" name="value" placeholder="Enter value" maxlength="30" style="text-align: center" required />
+                {% elif tracker.tracker_type=='Fahrenheit' %}
+                <input type="number" class="form-control" id="value" name="value" placeholder="Enter Fahrenheit" maxlength="30" style="text-align: center" required />
+                {% elif tracker.tracker_type=='Mood' %}
+                <select style="text-align: center;" id="value" class="form-control" name="value" required>
+                    <option value="" disabled selected>Choose your mood</option>
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Angry">Angry</option>
+                    <option value="Depressed">Depressed</option>
+                    <option value="Anxious">Anxious</option>
+                </select>
+                {% elif tracker.tracker_type=='Boolean' %}
+                <input  type="radio" id="value" name="value" value="True" checked>
+                <label  for="value">True</label>                
+                <input  type="radio" id="value" name="value" value="False">
+                <label  for="value">False</label>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">            
+                <textarea class="form-control" id="notes" name="notes" placeholder="Enter log notes" maxlength="200" style="text-align: center" required></textarea>
+            </div>    
+        </div>    
+        <br>
+        <button type="submit" class="btn btn-light"><b>Add Log</b></button>
+    </div>
+</form>
+{% endblock %}

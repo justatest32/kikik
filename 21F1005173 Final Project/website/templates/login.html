@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-group emp-profile container shadow-sm col-md-4" style="text-align: center;">
+        <h5 style="padding-bottom: 5%;">Login to Habit Tracker</h5>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" style="text-align: center;" required/>
+            </div>
+        </div>   
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" style="text-align: center;" required/>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-light">Login</button>
+    </div>
+</form>
+{% endblock %}

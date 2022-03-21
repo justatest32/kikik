@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<br>
+<div class="container emp-profile shadow-sm col-md-6">
+  <table class="table table-hover align-middle">
+    <thead class="table">
+      <tr>
+        <th scope="col">Tracker</th>
+        <th scope="col">Description</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tracker in tracker %}
+      {% if tracker.user_id==user.id %}
+      <tr>
+        {% set tracker_id=tracker.id %}
+        <td><a href="{{ url_for('views.view_tracker', record_id = tracker_id) }}" style="text-decoration: none;">{{tracker.name}}</a></td>
+        <td>{{tracker.description}}</td>
+        <td><a href="{{ url_for('views.add_log', record_id = tracker_id) }}" class="btn btn-light" style="font-weight: 100 ;">✚</a></td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{ url_for('views.edit_tracker', record_id = tracker_id) }}">Edit Tracker</a>
+              <a class="dropdown-item" href="{{ url_for('views.delete_tracker', record_id = tracker_id) }}">Remove Tracker</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  <div align="center">
+    <a href="/add-tracker-page" class="btn btn-light">Add Tracker</a>
+  </div>
+</div>
+{% endblock %}

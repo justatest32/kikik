@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Add Tracker{% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-group emp-profile container shadow-sm col-md-4" style="text-align: center;">
+        <h5 style="padding-bottom: 5%;">Add Tracker</h5>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter tracker name" maxlength="30" style="text-align: center" required />
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <textarea class="form-control" id="description" name="description" placeholder="Enter tracker description" maxlength="200" style="text-align: center" required></textarea>
+            </div>
+        </div>    
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <select style="text-align: center" id="type" class="form-control" name="type" required>
+                    <option value="" disabled selected>Select tracker type</option>
+                    <option value="Numerical">Numerical</option>
+                    <option value="Mood">Mood</option>
+                    <option value="Fahrenheit">Fahrenheit</option>
+                    <option value="Boolean">Boolean</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">        
+                <input type="text" class="form-control" id="settings" name="settings" placeholder="Enter tracker settings" maxlength="80" style="text-align: center" />
+            </div>
+        </div>    
+        <br>
+        <button type="submit" class="btn btn-light">Add Tracker</button>
+    </div>
+</form>
+
+{% endblock %}

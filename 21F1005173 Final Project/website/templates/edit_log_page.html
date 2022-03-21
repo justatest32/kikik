@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Edit Log{% endblock %}
+
+{% block content %}
+<form method="post">
+    <div class="form-group emp-profile container shadow-sm col-md-4" style="text-align: center;">
+        <h5 style="padding-bottom: 5%;">Edit Log</h5>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">
+                <span class="input-group-text">When:</span>
+                <input type="datetime-local" class="form-control" id="date" name="date" style="text-align: center" value="{{log.timestamp}}" />
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div>
+                {% if tracker.tracker_type=='Numerical' %}
+                <input type="number" class="form-control" id="value" name="value" placeholder="Enter Number" maxlength="30" style="text-align: center" value="{{log.value}}" />
+                {% elif tracker.tracker_type=='Fahrenheit' %}
+                <input type="number" class="form-control" id="value" name="value" placeholder="Enter Fahrenheit" maxlength="30" style="text-align: center" value="{{log.value}}" />
+                {% elif tracker.tracker_type=='Mood' %}
+                <select style="text-align: center" id="value" class="form-control" name="value" required>
+                    <option value="{{log.value}}">{{log.value}}</option>
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Angry">Angry</option>
+                    <option value="Depressed">Depressed</option>
+                    <option value="Anxious">Anxious</option>
+                </select>
+                {% elif tracker.tracker_type=='Boolean' %}
+                {% if log.value=='True' %}
+                <input type="radio" id="value" name="value" value="{{log.value}}" checked>
+                <label for="value">{{log.value}}</label>
+                <input type="radio" id="value" name="value" value="False">
+                <label for="value">False</label>
+                {% else %}
+                <input type="radio" id="value" name="value" value="True">
+                <label for="value">True</label><br>
+                <input type="radio" id="value" name="value" value="{{log.value}}" checked>
+                <label for="value">{{log.value}}</label><br>
+                {% endif %}
+
+                {% endif %}
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 1.5%;">
+            <div class="input-group">            
+                <textarea class="form-control" id="notes" name="notes" placeholder="Enter log notes" maxlength="200" style="text-align: center">{{log.notes}}</textarea>
+            </div>
+        </div>        
+        <br>
+        <button type="submit" class="btn btn-light"><b>Update Log</b></button>
+    </div>
+</form>
+{% endblock %}
